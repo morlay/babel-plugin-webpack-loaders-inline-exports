@@ -1,0 +1,64 @@
+{
+  "name": "babel-plugin-webpack-loaders-inline-exports",
+  "version": "0.1.0",
+  "main": "lib/index.js",
+  "config": {
+    "MOCHA_OPTS": "-R dot --compilers js:babel-register src/__tests__/*.spec.js"
+  },
+  "files": [
+    "lib",
+    "src"
+  ],
+  "scripts": {
+    "test": "npm run lint && npm run ut && npm run build && npm run examples",
+    "ut": "mocha $npm_package_config_MOCHA_OPTS",
+    "examples": "BABEL_DISABLE_CACHE=1 node ./examples/run.js",
+    "build": "rm -rf lib && babel src/ --ignore __*__ --out-dir lib/",
+    "release": "npm run build && npm publish",
+    "lint": "eslint src/"
+  },
+  "author": "",
+  "license": "WTFPL",
+  "devDependencies": {
+    "babel-cli": "6.5.x",
+    "babel-core": "6.5.x",
+    "babel-eslint": "5.0.x",
+    "babel-plugin-transform-class-properties": "6.5.x",
+    "babel-plugin-transform-object-rest-spread": "6.5.x",
+    "babel-preset-es2015": "6.5.x",
+    "babel-register": "6.5.x",
+    "chai": "3.5.x",
+    "css-loader": "0.23.x",
+    "eslint": "1.10.x",
+    "eslint-config-airbnb": "5.0.x",
+    "extract-text-webpack-plugin": "1.0.1",
+    "file-loader": "0.8.5",
+    "mocha": "2.4.x",
+    "react": "0.14.x",
+    "svg2jsx": "0.1.x",
+    "raw-loader": "0.5.x",
+    "svgo-loader": "1.1.0"
+  },
+  "dependencies": {
+    "deasync": "0.1.x",
+    "lodash": "4.5.x",
+    "memory-fs": "0.3.0",
+    "webpack": "1.12.x"
+  },
+  "directories": {
+    "example": "examples"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/morlay/babel-plugin-webpack-loaders-inline-exports.git"
+  },
+  "bugs": {
+    "url": "https://github.com/morlay/babel-plugin-webpack-loaders-inline-exports/issues"
+  },
+  "homepage": "https://github.com/morlay/babel-plugin-webpack-loaders-inline-exports#readme",
+  "keywords": [
+    "babel-plugin",
+    "webpack-loaders"
+  ],
+  "description": "pick webpack-loaders exports as inline replace"
+}
