@@ -1,7 +1,11 @@
 import path from 'path';
 import webpack from 'webpack';
 import deasync from 'deasync';
+import _ from 'lodash';
 import MemoryFS from 'memory-fs';
+
+const removeCommonsChunkPlugin = (plugins) =>
+  _.filter(plugins, (pluginInstance) => !(pluginInstance instanceof webpack.optimize.CommonsChunkPlugin));
 
 const runWebpackSync = (filename, webpackConfig) => {
   let result;
@@ -13,6 +17,7 @@ const runWebpackSync = (filename, webpackConfig) => {
   const compiler = webpack({
     ...webpackConfig,
     entry: filename,
+    plugins: removeCommonsChunkPlugin(webpackConfig.plugins),
     output: {
       ...webpackConfig.output,
       libraryTarget: 'commonjs2',
