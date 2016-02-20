@@ -5,7 +5,10 @@ import _ from 'lodash';
 import MemoryFS from 'memory-fs';
 
 const removeCommonsChunkPlugin = (plugins) =>
-  _.filter(plugins, (pluginInstance) => !(pluginInstance instanceof webpack.optimize.CommonsChunkPlugin));
+  _.filter(
+    plugins,
+    (pluginInstance) => !(pluginInstance instanceof webpack.optimize.CommonsChunkPlugin)
+  );
 
 const runWebpackSync = (filename, webpackConfig) => {
   let result;
@@ -41,7 +44,12 @@ const runWebpackSync = (filename, webpackConfig) => {
     if (err) {
       throw err;
     }
-    result = String(fs.readFileSync(path.join(destDir, name)));
+    const resultFilename = path.join(destDir, name);
+    if (fs.existsSync(resultFilename)) {
+      result = String(fs.readFileSync(resultFilename));
+    } else {
+      result = '';
+    }
   });
 
   deasync.loopWhile(() => result === undefined);

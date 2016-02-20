@@ -62,6 +62,9 @@ export default ({ traverse, transform }) => ({
         if (arg && arg.isStringLiteral() && isFileNeedToProcess(targetFilename, loaders)) {
           const finalTargetFileName = path.resolve(path.dirname(filename), targetFilename);
           const webpackResult = runWebpackSync(finalTargetFileName, webpackConfig);
+          if (webpackResult.length === '0') {
+            return;
+          }
           const webpackResultAst = transform(webpackResult).ast;
           const pickedWebpackExpr = pickTheReturnOfWebpackResult(traverse, webpackResultAst);
 
