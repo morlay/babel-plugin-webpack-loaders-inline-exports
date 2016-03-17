@@ -4,10 +4,18 @@ import deasync from 'deasync';
 import _ from 'lodash';
 import MemoryFS from 'memory-fs';
 
-const removeCommonsChunkPlugin = (plugins) =>
+const unnecessaryPluginList = [
+  webpack.optimize.UglifyJsPlugin,
+  webpack.optimize.CommonsChunkPlugin
+];
+
+const isPluginInstanceOf = (pluginList, targetPlugin) =>
+  _.reduce(pluginList, (result, Plugin) => result && (targetPlugin instanceof Plugin), true);
+
+const removeUnnecessaryPlugins = (plugins) =>
   _.filter(
     plugins,
-    (pluginInstance) => !(pluginInstance instanceof webpack.optimize.CommonsChunkPlugin)
+    (pluginInstance) => !isPluginInstanceOf(unnecessaryPluginList, pluginInstance)
   );
 
 const runWebpackSync = (filename, webpackConfig) => {
@@ -20,7 +28,7 @@ const runWebpackSync = (filename, webpackConfig) => {
   const compiler = webpack({
     ...webpackConfig,
     entry: filename,
-    plugins: removeCommonsChunkPlugin(webpackConfig.plugins),
+    plugins: removeUnnecessaryPlugins(webpackConfig.plugins),
     output: {
       ...webpackConfig.output,
       libraryTarget: 'commonjs2',
