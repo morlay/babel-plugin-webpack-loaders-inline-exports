@@ -1,6 +1,6 @@
 {
   "name": "babel-plugin-webpack-loaders-inline-exports",
-  "version": "0.1.1",
+  "version": "0.1.2",
   "main": "lib/index.js",
   "config": {
     "MOCHA_OPTS": "-R dot --compilers js:babel-register src/__tests__/*.spec.js"
