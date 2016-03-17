@@ -4,13 +4,10 @@ import deasync from 'deasync';
 import _ from 'lodash';
 import MemoryFS from 'memory-fs';
 
-const unnecessaryPluginList = [
-  webpack.optimize.UglifyJsPlugin,
-  webpack.optimize.CommonsChunkPlugin
-];
+const unnecessaryPluginList = _.values(webpack.optimize);
 
 const isPluginInstanceOf = (pluginList, targetPlugin) =>
-  _.reduce(pluginList, (result, Plugin) => result && (targetPlugin instanceof Plugin), true);
+  _.reduce(pluginList, (result, Plugin) => result || (targetPlugin instanceof Plugin), false);
 
 const removeUnnecessaryPlugins = (plugins) =>
   _.filter(
