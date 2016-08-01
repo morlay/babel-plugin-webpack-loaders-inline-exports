@@ -1,4 +1,4 @@
-import { expect } from 'chai';
+import { expect } from '@morlay/tests';
 import path from 'path';
 import transformFileSync from '../runWebpackSync';
 

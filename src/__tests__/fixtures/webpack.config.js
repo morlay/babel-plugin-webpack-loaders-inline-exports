@@ -8,7 +8,9 @@ module.exports = {
     path: './dist',
   },
   plugins: [
-    new ExtractTextPlugin('app', '[name].css'),
+    new ExtractTextPlugin({
+      filename: '[name].css',
+    }),
     new webpack.optimize.DedupePlugin(),
     new webpack.optimize.UglifyJsPlugin({
       compress: {

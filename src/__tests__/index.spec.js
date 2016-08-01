@@ -1,4 +1,4 @@
-import { expect } from 'chai';
+import { expect } from '@morlay/tests';
 import { transform } from 'babel-core';
 import webpackInlineLoaders from '../index';
 
@@ -18,9 +18,11 @@ describe(__filename, () => {
       filename: __filename,
     };
 
-    expect(transform(`
+    const result = transform(`
         var css = require('./fixtures/index.css');
-      `, babelOptions).code).to.be.a('string');
+      `, babelOptions).code;
+
+    expect(result).to.be.a('string');
   });
   it('should transform code with config', () => {
     const babelOptions = {

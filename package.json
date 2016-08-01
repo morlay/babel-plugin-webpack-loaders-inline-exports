@@ -11,7 +11,7 @@
   ],
   "scripts": {
     "mocha": "mocha $npm_package_config_MOCHA_OPTS",
-    "examples": "BABEL_DISABLE_CACHE=1 node ./examples/run.js",
+    "examples": "node ./examples/run.js",
     "build": "rm -rf lib && babel src/ --ignore __*__ --out-dir lib/",
     "lint": "eslint src/ --fix",
     "test": "npm run lint && npm run mocha && npm run build && npm run examples",
@@ -24,18 +24,20 @@
     "@morlay/babel-preset": "1.0.x",
     "@morlay/eslint-config": "1.0.x",
     "@morlay/tests": "1.0.x",
+    "babel-loader": "6.2.4",
+    "babel-preset-es2015-webpack": "6.4.x",
     "babel-plugin-transform-es2015-modules-commonjs": "6.11.x",
     "css-loader": "0.23.x",
-    "extract-text-webpack-plugin": "1.0.x",
+    "extract-text-webpack-plugin": "2.0.0-beta.3",
     "file-loader": "0.9.0",
     "raw-loader": "0.5.x",
     "react": "15.3.x",
     "svg2jsx": "0.1.x",
     "svgo-loader": "1.1.0",
-    "webpack": "1.x"
+    "webpack": "2.1.0-beta.20"
   },
   "peerDependencies": {
-    "webpack": "*"
+    "webpack": ">= 2"
   },
   "dependencies": {
     "deasync": "0.1.x",

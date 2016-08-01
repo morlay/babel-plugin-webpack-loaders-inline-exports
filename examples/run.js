@@ -1,12 +1,12 @@
-require('babel-register')({
+require('babel-core/register')({
   plugins: [
     [
       require('../lib/index').default,
       {
-        config: './examples/webpack.config.js'
-      }
-    ]
-  ]
+        config: './examples/webpack.config.js',
+      },
+    ],
+  ],
 });
 
 require('./main');

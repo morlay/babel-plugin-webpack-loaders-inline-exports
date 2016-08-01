@@ -7,10 +7,22 @@ module.exports = {
     path: './dist',
   },
   plugins: [
-    new ExtractTextPlugin('app', '[name].css'),
+    new ExtractTextPlugin({ filename: '[name].css' }),
   ],
   module: {
     loaders: [
+      {
+        test: /\.js/,
+        loader: 'babel-loader',
+        query: {
+          cacheDirectory: true,
+          compact: true,
+          presets: [
+            'es2015-webpack',
+            '@morlay/babel-preset',
+          ],
+        },
+      },
       {
         test: /\.css$/,
         loader: ExtractTextPlugin.extract([
@@ -22,7 +34,7 @@ module.exports = {
         loader: 'css-loader',
       },
       {
-        test: /\.(txt|svg)$/,
+        test: /\.txt$/,
         loader: 'raw-loader',
       },
       {
