@@ -30,7 +30,7 @@ const runWebpackSync = (filename, webpackConfig) => {
       ...webpackConfig.output,
       libraryTarget: 'commonjs2',
       path: destDir,
-      filename: name
+      filename: name,
     },
     externals: [
       (context, subRequest, callback) => {
@@ -39,8 +39,8 @@ const runWebpackSync = (filename, webpackConfig) => {
         } else {
           callback();
         }
-      }
-    ]
+      },
+    ],
   });
 
   compiler.outputFileSystem = fs;

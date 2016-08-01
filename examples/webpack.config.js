@@ -4,10 +4,10 @@ module.exports = {
   context: __dirname,
   entry: './main.js',
   output: {
-    path: './dist'
+    path: './dist',
   },
   plugins: [
-    new ExtractTextPlugin('app', '[name].css')
+    new ExtractTextPlugin('app', '[name].css'),
   ],
   module: {
     loaders: [
@@ -15,24 +15,24 @@ module.exports = {
         test: /\.css$/,
         loader: ExtractTextPlugin.extract([
           'css-loader?modules&importLoaders=2&localIdentName=[name]__[local]--[hash:base64:5]'
-        ])
+        ]),
       },
       {
         test: /\.scss$/,
-        loader: 'css-loader'
+        loader: 'css-loader',
       },
       {
         test: /\.(txt|svg)$/,
-        loader: 'raw-loader'
+        loader: 'raw-loader',
       },
       {
         test: /\.svg$/,
         loaders: [
           'svg2jsx',
-          'svgo-loader?useConfig=svgo'
-        ]
-      }
-    ]
+          'svgo-loader?useConfig=svgo',
+        ],
+      },
+    ],
   },
   svgo: {
     plugins: [
@@ -41,7 +41,7 @@ module.exports = {
       { removeDesc: true },
       { removeDimensions: true },
       { convertColors: { shorthex: false } },
-      { convertPathData: false }
-    ]
-  }
+      { convertPathData: false },
+    ],
+  },
 };

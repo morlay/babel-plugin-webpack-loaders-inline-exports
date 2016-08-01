@@ -10,12 +10,12 @@ describe(__filename, () => {
           module: {
             loaders: [{
               test: /\.css/,
-              loader: 'file-loader'
-            }]
-          }
-        }]
+              loader: 'file-loader',
+            }],
+          },
+        }],
       ],
-      filename: __filename
+      filename: __filename,
     };
 
     expect(transform(`
@@ -26,10 +26,10 @@ describe(__filename, () => {
     const babelOptions = {
       plugins: [
         [webpackInlineLoaders, {
-          config: './src/__tests__/fixtures/webpack.config.js'
-        }]
+          config: './src/__tests__/fixtures/webpack.config.js',
+        }],
       ],
-      filename: __filename
+      filename: __filename,
     };
 
     expect(transform(`

@@ -3,50 +3,44 @@
   "version": "0.1.4",
   "main": "lib/index.js",
   "config": {
-    "MOCHA_OPTS": "-R dot --compilers js:babel-register src/__tests__/*.spec.js"
+    "MOCHA_OPTS": "-R dot --compilers js:babel-core/register src/__tests__/*.spec.js"
   },
   "files": [
     "lib",
     "src"
   ],
   "scripts": {
-    "test": "npm run lint && npm run ut && npm run build && npm run examples",
-    "ut": "mocha $npm_package_config_MOCHA_OPTS",
+    "mocha": "mocha $npm_package_config_MOCHA_OPTS",
     "examples": "BABEL_DISABLE_CACHE=1 node ./examples/run.js",
     "build": "rm -rf lib && babel src/ --ignore __*__ --out-dir lib/",
-    "release": "npm run build && npm publish",
-    "lint": "eslint src/"
+    "lint": "eslint src/ --fix",
+    "test": "npm run lint && npm run mocha && npm run build && npm run examples",
+    "webpack2": "npm i webpack@2.1.0-beta.20 && npm test",
+    "prepublish": "npm run build"
   },
   "author": "",
   "license": "WTFPL",
   "devDependencies": {
-    "babel-cli": "6.6.x",
-    "babel-core": "6.7.x",
-    "babel-eslint": "6.0.0-beta.6",
-    "babel-plugin-transform-class-properties": "6.6.x",
-    "babel-plugin-transform-object-rest-spread": "6.6.x",
-    "babel-preset-es2015": "6.6.x",
-    "babel-register": "6.7.x",
-    "chai": "3.5.x",
+    "@morlay/babel-preset": "1.0.x",
+    "@morlay/eslint-config": "1.0.x",
+    "@morlay/tests": "1.0.x",
+    "babel-plugin-transform-es2015-modules-commonjs": "6.11.x",
     "css-loader": "0.23.x",
-    "eslint": "2.4.x",
-    "eslint-config-airbnb": "6.1.x",
-    "extract-text-webpack-plugin": "1.0.1",
-    "file-loader": "0.8.5",
-    "mocha": "2.4.x",
-    "react": "0.14.x",
-    "svg2jsx": "0.1.x",
+    "extract-text-webpack-plugin": "1.0.x",
+    "file-loader": "0.9.0",
     "raw-loader": "0.5.x",
-    "svgo-loader": "1.1.0"
+    "react": "15.3.x",
+    "svg2jsx": "0.1.x",
+    "svgo-loader": "1.1.0",
+    "webpack": "1.x"
+  },
+  "peerDependencies": {
+    "webpack": "*"
   },
   "dependencies": {
     "deasync": "0.1.x",
-    "lodash": "4.6.x",
-    "memory-fs": "0.3.x",
-    "webpack": "1.x"
-  },
-  "directories": {
-    "example": "examples"
+    "lodash": "4.14.x",
+    "memory-fs": "0.3.x"
   },
   "repository": {
     "type": "git",

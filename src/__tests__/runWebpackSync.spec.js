@@ -9,9 +9,9 @@ describe(__filename, () => {
       module: {
         loaders: [{
           test: /\.svg/,
-          loader: 'svg2jsx'
-        }]
-      }
+          loader: 'svg2jsx',
+        }],
+      },
     });
     expect(result).to.be.a('string');
   });

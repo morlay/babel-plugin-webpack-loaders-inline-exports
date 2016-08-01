@@ -35,17 +35,21 @@ const pickTheReturnOfWebpackResult = (traverse, ast) => {
       ) {
         expr = nodePath.node.right;
       }
-    }
+    },
   });
 
   return traverse.removeProperties(expr);
 };
 
 const resolveWebpackConfig = (options) => {
-  const webpackConfig = options.config ? require(path.join(process.cwd(), options.config)) : {};
+  /* eslint global-require: 0 */
+  const webpackConfig = options.config
+    ? require(path.join(process.cwd(), options.config))
+    : {};
+
   return {
     ...webpackConfig,
-    ...(_.omit(options, 'config'))
+    ...(_.omit(options, 'config')),
   };
 };
 
@@ -73,6 +77,6 @@ export default ({ traverse, transform }) => ({
           }
         }
       }
-    }
-  }
+    },
+  },
 });
