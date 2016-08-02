@@ -56,12 +56,12 @@ const resolveWebpackConfig = (options) => {
 export default ({ traverse, transform }) => ({
   visitor: {
     CallExpression(nodePath, { opts, file }) {
-      const webpackConfig = resolveWebpackConfig(opts);
-      const loaders = webpackConfig.module ? webpackConfig.module.loaders : [];
       if (isRequireCallExpression(nodePath)) {
         const arg = nodePath.get('arguments')[0];
         const filename = file.opts.filename;
         const targetFilename = arg.node.value;
+        const webpackConfig = resolveWebpackConfig(opts);
+        const loaders = webpackConfig.module ? webpackConfig.module.loaders : [];
 
         if (arg && arg.isStringLiteral() && isFileNeedToProcess(targetFilename, loaders)) {
           const finalTargetFileName = path.resolve(path.dirname(filename), targetFilename);

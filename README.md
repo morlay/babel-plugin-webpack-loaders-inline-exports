@@ -79,3 +79,4 @@ special options in babel option for this plugin will merge into webpack config.
 
 * Please use this only in Node.
 * And for `css-loader`, should use with `extract-text-webpack-plugin` and don't use with `style-loader`
+* `BABEL_DISABLE_CACHE=1` may used

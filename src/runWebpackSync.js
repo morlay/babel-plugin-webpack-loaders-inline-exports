@@ -32,6 +32,7 @@ const runWebpackSync = (filename, webpackConfig) => {
       path: destDir,
       filename: name,
     },
+    devtool: false,
     externals: [
       (context, subRequest, callback) => {
         if (subRequest !== filename) {
