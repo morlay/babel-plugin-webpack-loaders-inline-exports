@@ -18,7 +18,7 @@ module.exports = {
           cacheDirectory: true,
           compact: true,
           presets: [
-            'es2015-webpack',
+            ['es2015', { modules: false }],
             '@morlay/babel-preset',
           ],
         },
