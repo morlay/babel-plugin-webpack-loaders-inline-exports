@@ -41,16 +41,16 @@ const pickTheReturnOfWebpackResult = (traverse, ast) => {
   return traverse.removeProperties(expr);
 };
 
-const resolveWebpackConfig = (options) => {
-  /* eslint global-require: 0 */
-  const webpackConfig = options.config
-    ? require(path.join(process.cwd(), options.config))
-    : {};
+const resolveWebpackConfig = (configFile) => {
+  /* eslint import/no-dynamic-require: 0 */
 
-  return {
-    ...webpackConfig,
-    ...(_.omit(options, 'config')),
-  };
+  const finalConfigFile = _.replace(configFile, /\$\{?PWD\}?/g, process.env.PWD);
+
+  if (_.startsWith(finalConfigFile, '/')) {
+    return require(finalConfigFile);
+  }
+
+  return require(path.join(process.cwd(), configFile));
 };
 
 export default ({ traverse, transform }) => ({
@@ -60,12 +60,15 @@ export default ({ traverse, transform }) => ({
         const arg = nodePath.get('arguments')[0];
         const filename = file.opts.filename;
         const targetFilename = arg.node.value;
-        const webpackConfig = resolveWebpackConfig(opts);
+        const webpackConfig = opts.configFile ? resolveWebpackConfig(opts.configFile) : opts;
+
         const loaders = webpackConfig.module ? webpackConfig.module.loaders : [];
 
         if (arg && arg.isStringLiteral() && isFileNeedToProcess(targetFilename, loaders)) {
           const finalTargetFileName = path.resolve(path.dirname(filename), targetFilename);
+
           const webpackResult = runWebpackSync(finalTargetFileName, webpackConfig);
+
           if (webpackResult.length === '0') {
             return;
           }

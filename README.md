@@ -66,7 +66,7 @@ all options same as webpack, and we can assign a config by the webpack config fi
     [
        "babel-plugin-webpack-loaders-inline-exports",
        {
-          "config": "./webpack.config.js"
+          "configFile": "./webpack.config.js"
        }
     ]
   ]
@@ -74,6 +74,20 @@ all options same as webpack, and we can assign a config by the webpack config fi
 ```
 special options in babel option for this plugin will merge into webpack config.
 
+For `ava` user, add set env var `$PWD` is needed;
+
+```json
+{
+  "plugins": [
+    [
+       "babel-plugin-webpack-loaders-inline-exports",
+       {
+          "configFile": "${PWD}/webpack.config.js"
+       }
+    ]
+  ]
+}
+```
 
 ### Warning
 

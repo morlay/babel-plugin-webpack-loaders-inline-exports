@@ -1,18 +1,20 @@
-import { expect } from '@morlay/tests';
-import path from 'path';
-import transformFileSync from '../runWebpackSync';
+import _ from 'lodash';
+import test, { AssertContext } from 'ava';
+import getExportsFromCodeString from './helpers/getExportsFromCodeString';
 
-describe(__filename, () => {
-  const targetFile = path.join(__dirname, 'fixtures/icon.svg');
-  it('getLoaders should pick the matched loaders', () => {
-    const result = transformFileSync(targetFile, {
-      module: {
-        loaders: [{
-          test: /\.svg/,
-          loader: 'svg2jsx',
-        }],
-      },
-    });
-    expect(result).to.be.a('string');
+import runWebpackSync from '../runWebpackSync';
+
+test('runWebpackSync should transform code string', (t: AssertContext) => {
+  const codeString = runWebpackSync('./fixtures/some.css', {
+    module: {
+      loaders: [{
+        test: /\.css/,
+        loader: 'file-loader',
+      }],
+    },
   });
+
+  const result = getExportsFromCodeString(codeString);
+
+  t.true(_.isString(result));
 });
