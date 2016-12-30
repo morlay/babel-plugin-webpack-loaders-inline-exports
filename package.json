@@ -1,50 +1,51 @@
 {
   "name": "babel-plugin-webpack-loaders-inline-exports",
-  "version": "0.3.0",
+  "version": "0.4.0",
   "main": "lib/index.js",
+  "types": "lib/index.d.ts",
   "ava": {
     "files": [
       "**/__tests__/*.spec.js"
-    ],
-    "require": [
-      "babel-core/register"
-    ],
-    "babel": "inherit"
+    ]
   },
   "files": [
     "lib/**",
     "src/**"
   ],
   "scripts": {
-    "build": "rm -rf lib && babel src/ --ignore __*__ -d lib/",
-    "lint": "eslint src/ --fix",
+    "build": "rm -rf lib && tsc",
+    "lint": "tslint \"src/{,**/}{,**/}*.ts{,x}\" -c tslint.json",
     "start": "webpack --config ./src/__tests__/fixtures/webpack.config.js",
-    "test": "npm run lint && ava",
+    "test": "npm run lint && npm run build && ava -v",
     "prepublish": "npm run build"
   },
   "license": "WTFPL",
   "devDependencies": {
-    "@morlay/babel-preset": "2.0.x",
-    "@morlay/eslint-config": "2.0.x",
-    "ava": "0.16.x",
-    "babel-loader": "6.2.x",
-    "css-loader": "0.25.x",
-    "eslint": "3.7.1",
-    "extract-text-webpack-plugin": "2.0.0-beta.3",
+    "@types/babel-core": "6.7.14",
+    "@types/node": "6.0.x",
+    "ava": "0.17.x",
+    "css-loader": "0.26.x",
+    "eslint": "3.12.2",
+    "extract-text-webpack-plugin": "2.0.0-beta.4",
     "file-loader": "0.9.x",
     "raw-loader": "0.5.x",
-    "react": "15.3.x",
+    "react": "15.4.x",
     "svg2jsx": "0.1.x",
     "svgo-loader": "1.1.x",
-    "webpack": "2.1.0-beta.20"
+    "tslint": "4.2.0",
+    "typescript": "2.1.x",
+    "webpack": "2.2.0-rc.3"
   },
   "peerDependencies": {
     "webpack": "*"
   },
   "dependencies": {
+    "@types/babel-types": "6.7.14",
+    "@types/lodash": "4.14.x",
+    "@types/webpack": "2.1.x",
     "deasync": "0.1.x",
     "lodash": "4.x",
-    "memory-fs": "0.3.x"
+    "memory-fs": "0.4.x"
   },
   "repository": {
     "type": "git",

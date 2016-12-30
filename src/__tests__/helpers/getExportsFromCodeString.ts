@@ -1,6 +1,4 @@
-// @flow
-
-import vm from 'vm';
+import * as vm from "vm";
 
 const getExportsFromCodeString = (codeString: string): Object => {
   const module = {
@@ -11,7 +9,9 @@ const getExportsFromCodeString = (codeString: string): Object => {
       ${codeString}
   })`;
 
-  vm.runInThisContext(code)(require, module, module.exports);
+  vm.runInThisContext(code, {
+    filename: `${process.cwd()}/fixtures/index.js`,
+  })(require, module, module.exports);
 
   return module.exports;
 };

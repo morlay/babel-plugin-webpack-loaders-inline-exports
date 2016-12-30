@@ -1,0 +1,23 @@
+{
+  "compilerOptions": {
+    "rootDir": "src",
+    "outDir": "lib",
+    "noImplicitAny": true,
+    "experimentalDecorators": true,
+    "declaration": true,
+    "moduleResolution": "node",
+    "module": "commonjs",
+    "target": "es2015",
+    "pretty": true,
+    "typeRoots": [
+      "./node_modules/@types/",
+      "./@types/"
+    ],
+    "sourceMap": false
+  },
+  "exclude": [
+    "lib/*",
+    "node_modules/*"
+  ],
+  "compileOnSave": true
+}
